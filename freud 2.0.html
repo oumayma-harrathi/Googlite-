@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freud 2.0 - Robot Interaction</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background: linear-gradient(135deg, #212121, #484848);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+    
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            transition: transform 0.5s ease;
+        }
+    
+        .container:hover {
+            transform: scale(1.05);
+        }
+    
+        h1 {
+            font-size: 36px;
+            color: #f2f2f2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+    
+        p {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+    
+        p:hover {
+            opacity: 1;
+        }
+    
+        .robot {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 60%, #ff8f00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+    
+        button {
+            background-color: #ff5722;
+            color: white;
+            font-size: 18px;
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+    
+        button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00bcd4, #4caf50);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+    
+        button:hover {
+            background-color: #d32f2f;
+            transform: scale(1.1);
+        }
+    
+        button:hover:before {
+            opacity: 0.4;
+        }
+    
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="robot">🤖</div>
+        <h1>Hello, I'm Freud 2.0</h1>
+        <p>Please allow access to your microphone and camera to start our conversation.</p>
+        <button onclick="startConversation()">Allow Access</button>
+    </div>
+
+    <script>
+        function startConversation() {
+            // Request access to the user's microphone and camera
+            navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+                .then(function(stream) {
+                    // Success: Microphone and camera access granted
+                    alert("Access granted! You can start talking now.");
+                    // You can now start processing the audio and video streams
+                    // For example, you can send the stream to a server for analysis
+                })
+                .catch(function(error) {
+                    // Error: Access denied or an error occurred
+                    alert("Error: " + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
